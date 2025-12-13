@@ -4,3 +4,6 @@ from django.http import HttpResponse
 
 def index(request):
   return  HttpResponse("Hi")
+
+def item(request):
+  return  HttpResponse("<h1>Hi (in h1 tag)</h1>")
