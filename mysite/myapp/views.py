@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+
+from .models import Items
 # Create your views here.
 
 def index(request):
-  return  HttpResponse("Hi")
+  item_list = Items.objects. all()
+  return  HttpResponse(item_list)
 
 def item(request):
   return  HttpResponse("<h1>Hi (in h1 tag)</h1>")
