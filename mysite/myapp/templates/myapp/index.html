@@ -1,0 +1,7 @@
+<ul>
+  {% for item in item_list%}
+  <li>{{item}} -> {{item.item_price}} -> {{item.item_desc}}</li>
+  {%endfor%}
+</ul>
+
+{% for item in item_list%} {{item}} -> {{item.item_price}} {%endfor%}
