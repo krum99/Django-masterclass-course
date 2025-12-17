@@ -13,7 +13,11 @@ def index(request):
 
 
 def detail (request, id):
-  return HttpResponse(f'This is the detail view for item with id {id}.')
+  item = Item.objects.get(id=id)
+  context = {
+    'item': item
+  }
+  return render(request, 'myapp/detail.html', context)
 
 def item(request):
   return  HttpResponse("<h1>Hi (in h1 tag)</h1>")
