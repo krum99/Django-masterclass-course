@@ -1,9 +1,21 @@
-<ul>
-  {% for item in item_list%}
-  <li>
-    <a href="{% url 'myapp:detail' item.id %}"
-      >{{item}} -> {{item.item_price}} -> {{item.item_desc}}</a
-    >
-  </li>
-  {%endfor%}
-</ul>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'myapp/style.css' %}" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      {% for item in item_list%}
+      <li>
+        <a href="{% url 'myapp:detail' item.id %}"
+          >{{item}} -> {{item.item_price}} -> {{item.item_desc}}</a
+        >
+      </li>
+      {%endfor%}
+    </ul>
+  </body>
+</html>
