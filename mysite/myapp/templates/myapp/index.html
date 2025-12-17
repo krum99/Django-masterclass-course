@@ -1,7 +1,9 @@
 <ul>
   {% for item in item_list%}
-  <li>{{item}} -> {{item.item_price}} -> {{item.item_desc}}</li>
+  <li>
+    <a href="/myapp/{{item.id}}"
+      >{{item}} -> {{item.item_price}} -> {{item.item_desc}}</a
+    >
+  </li>
   {%endfor%}
 </ul>
-
-{% for item in item_list%} {{item}} -> {{item.item_price}} {%endfor%}
