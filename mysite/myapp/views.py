@@ -18,6 +18,3 @@ def detail (request, id):
     'item': item
   }
   return render(request, 'myapp/detail.html', context)
-
-def item(request):
-  return  HttpResponse("<h1>Hi (in h1 tag)</h1>")
