@@ -10,7 +10,7 @@ def index(request):
   context = {
     'item_list': item_list,
   }
-  return  render(request, "myapp\index.html", context)
+  return  render(request, "myapp/index.html", context)
 
 
 def detail (request, id):
