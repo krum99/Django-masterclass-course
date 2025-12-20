@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from .models import Item
 from .forms import ItemForm
 # Create your views here.
 
+@login_required
 def index(request):
   item_list = Item.objects. all()
   context = {
