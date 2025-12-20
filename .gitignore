@@ -85,3 +85,7 @@ ehthumbs_vista.db
 [Dd]esktop.ini
 $RECYCLE.BIN/
 *.lnk
+
+#local pictures folder
+pictures/
+profile_pictures/
