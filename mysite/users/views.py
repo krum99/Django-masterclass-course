@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import RegisterForm
+from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -16,3 +17,7 @@ def register(request):
 
   
   return  render(request, 'users/register.html', {'form': form})
+
+def logout_view(request):
+  logout(request)
+  return render(request, 'users/logout.html')
