@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 from .models import Item
 from .forms import ItemForm
@@ -21,12 +22,17 @@ class IndexClassView(ListView):
   template_name = "myapp/index.html"
   context_object_name = 'item_list'
 
-def detail (request, id):
-  item = Item.objects.get(id=id)
-  context = {
-    'item': item
-  }
-  return render(request, 'myapp/detail.html', context)
+# def detail (request, id):
+#   item = Item.objects.get(id=id)
+#   context = {
+#     'item': item
+#   }
+#   return render(request, 'myapp/detail.html', context)
+
+class FoodDetail(DetailView):
+  model = Item
+  template_name = 'myapp/detail.html'
+  context_object_name = 'item'
 
 def create_item(request):
   form = ItemForm(request.POST or None)
