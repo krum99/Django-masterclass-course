@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.views.generic.list import ListView
 
 from .models import Item
 from .forms import ItemForm
@@ -14,6 +15,11 @@ def index(request):
   }
   return  render(request, "myapp/index.html", context)
 
+
+class IndexClassView(ListView):
+  model = Item
+  template_name = "myapp/index.html"
+  context_object_name = 'item_list'
 
 def detail (request, id):
   item = Item.objects.get(id=id)
