@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 from .models import Item
 from .forms import ItemForm
@@ -50,8 +50,7 @@ def create_item(request):
 class ItemCreateView(CreateView):
   model = Item
   fields = ['item_name', 'item_desc', 'item_price', 'item_image']
-  
-  
+
 
 def update_item(request, id):
   item = Item.objects.get(id=id)
@@ -65,6 +64,11 @@ def update_item(request, id):
     'form': form
   }
   return render(request, 'myapp/item-form.html', context)
+
+class ItemUpdateView(UpdateView):
+  model = Item
+  fields = ['item_name', 'item_desc', 'item_price', 'item_image']
+  template_name_suffix = '_update_form'
 
 def delete_item(request, id):
   item = Item.objects.get(id=id)

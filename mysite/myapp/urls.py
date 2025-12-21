@@ -7,6 +7,6 @@ urlpatterns = [
   path('',views.IndexClassView.as_view(), name='index'),
   path('<int:pk>/', views.FoodDetail.as_view(), name='detail'),
   path('add/', views.ItemCreateView.as_view(), name='create_item'),
-  path('update/<int:id>/', views.update_item, name='update'),
+  path('update/<int:pk>/', views.ItemUpdateView.as_view(), name='update'),
   path('delete/<int:id>/', views.delete_item, name='delete'),
 ]
