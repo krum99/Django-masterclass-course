@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
 
 from .models import Item
 from .forms import ItemForm
@@ -46,6 +47,11 @@ def create_item(request):
   }
   return render(request, 'myapp/item-form.html', context)
 
+class ItemCreateView(CreateView):
+  model = Item
+  fields = ['item_name', 'item_desc', 'item_price', 'item_image']
+  
+  
 
 def update_item(request, id):
   item = Item.objects.get(id=id)
