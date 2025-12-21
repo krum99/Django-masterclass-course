@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 from .models import Item
 from .forms import ItemForm
@@ -77,3 +78,7 @@ def delete_item(request, id):
     return redirect('myapp:index')
       
   return render(request, 'myapp/item-delete.html')
+
+class ItemDeleteView(DeleteView):
+  model = Item
+  success_url = reverse_lazy('myapp:index')
