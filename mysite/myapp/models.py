@@ -12,7 +12,7 @@ class Item(models.Model):
   user_name = models.ForeignKey(User, on_delete=models.CASCADE)
   item_name = models.CharField(max_length=200, db_index=True)
   item_desc = models.CharField()
-  item_price = models.DecimalField(max_digits=4, decimal_places=2, )
+  item_price = models.DecimalField(max_digits=4, decimal_places=2, db_index=True)
   item_image = models.URLField(max_length=500, default='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHCva-afP1vczYjMkGUFt4QQ51zwKM2q3GcQ&s')
   is_available = models.BooleanField(default=True)
   created_at = models.DateTimeField(auto_now_add=True)
