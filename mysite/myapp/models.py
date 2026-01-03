@@ -3,6 +3,12 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 class Item(models.Model):
+  
+  class Meta:
+    indexes = [
+      models.Index(fields=['user_name', 'item_price']),
+    ]
+
   def __str__(self):
     return self.item_name + ": " + str(self.item_price)
   
