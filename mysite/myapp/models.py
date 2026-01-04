@@ -24,6 +24,10 @@ class Item(models.Model):
   is_available = models.BooleanField(default=True)
   created_at = models.DateTimeField(auto_now_add=True)
 
+  is_deleted = models.BooleanField(default=False) # soft delete  flag
+
+  deleted_at = models.DateTimeField(null=True, blank=True)
+
   objects = ItemManager()
 
 class Category(models.Model):
