@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from .managers import ItemManager
 
+from django.utils import timezone
+
 class Item(models.Model):
   
   class Meta:
@@ -15,6 +17,11 @@ class Item(models.Model):
   
   def get_absolute_url(self):
     return reverse('myapp:index')
+  
+  def delete(self, using=None, keep_parents=False):
+    self.is_deleted = True
+    self.deleted_at = timezone.now()
+    self.save()
 
   user_name = models.ForeignKey(User, on_delete=models.CASCADE)
   item_name = models.CharField(max_length=200, db_index=True)
