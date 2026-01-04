@@ -36,6 +36,7 @@ class Item(models.Model):
   deleted_at = models.DateTimeField(null=True, blank=True)
 
   objects = ItemManager()
+  all_objects = models.Manager()
 
 class Category(models.Model):
   name = models.CharField(max_length=100)
