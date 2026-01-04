@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from .managers import ItemManager
 
 class Item(models.Model):
   
@@ -22,6 +23,8 @@ class Item(models.Model):
   item_image = models.URLField(max_length=500, default='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHCva-afP1vczYjMkGUFt4QQ51zwKM2q3GcQ&s')
   is_available = models.BooleanField(default=True)
   created_at = models.DateTimeField(auto_now_add=True)
+
+  objects = ItemManager()
 
 class Category(models.Model):
   name = models.CharField(max_length=100)
