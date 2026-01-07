@@ -5,6 +5,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 
 from .models import Item
 from .forms import ItemForm
@@ -13,8 +14,12 @@ from .forms import ItemForm
 @login_required
 def index(request):
   item_list = Item.objects. all()
+  paginator = Paginator(item_list, 5)
+  page_number = request.GET.get("page")
+  page_obj = paginator.get_page(page_number)
+
   context = {
-    'item_list': item_list,
+    'page_obj': page_obj,
   }
   return  render(request, "myapp/index.html", context)
 
