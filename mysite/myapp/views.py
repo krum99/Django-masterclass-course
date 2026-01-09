@@ -13,8 +13,8 @@ from .models import Item
 from .forms import ItemForm
 # Create your views here.
 
-@cache_page(60 * 15)
-@vary_on_headers("User-Agent")
+# @cache_page(60 * 15)
+# @vary_on_headers("User-Agent")
 @login_required
 def index(request):
   item_list = Item.objects. all()

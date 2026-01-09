@@ -1,5 +1,7 @@
 {% extends 'myapp/base.html' %} {% block body %}
+  {% load cache %}
   <div>
+    {% cache 900 page_obj %}
     {% for item in page_obj %}
       <div class="m-10 flex w-1/2 mx-auto">
         <div>
@@ -16,6 +18,7 @@
         </div>
       </div>
     {% endfor %}
+    {% endcache %}
   </div>
   <div class="flex items-centered justify-center space-x-4 py-4">
     {% if page_obj.has_previous %}
