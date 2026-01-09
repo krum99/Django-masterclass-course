@@ -6,11 +6,13 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
+from django.views.decorators.cache import cache_page
 
 from .models import Item
 from .forms import ItemForm
 # Create your views here.
 
+# @cache_page(60 * 15)
 @login_required
 def index(request):
   item_list = Item.objects. all()
