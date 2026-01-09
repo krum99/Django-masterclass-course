@@ -7,12 +7,14 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
 from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_headers
 
 from .models import Item
 from .forms import ItemForm
 # Create your views here.
 
-# @cache_page(60 * 15)
+@cache_page(60 * 15)
+@vary_on_headers("User-Agent")
 @login_required
 def index(request):
   item_list = Item.objects. all()
