@@ -9,6 +9,7 @@ from django.core.paginator import Paginator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 
 from .models import Item
 from .forms import ItemForm
@@ -22,6 +23,7 @@ logger = logging.getLogger(__name__)
 @login_required
 def index(request):
   logger.info("Fetching all items from the database")
+  logger.info(f"User [{timezone.now().isoformat()}] {request.user} requested item_list from {request.META.get('REMOTE_ADDR')}")
   item_list = Item.objects. all()
   logger.debug(f"Found {item_list.count()} items ")
   paginator = Paginator(item_list, 5)
