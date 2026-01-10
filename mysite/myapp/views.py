@@ -8,16 +8,21 @@ from django.urls import reverse_lazy
 from django.core.paginator import Paginator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
+import logging
 
 from .models import Item
 from .forms import ItemForm
 # Create your views here.
 
+logger = logging.getLogger(__name__)
+
 # @cache_page(60 * 15)
 # @vary_on_headers("User-Agent")
 @login_required
 def index(request):
+  logger.info("Fetching all items from the database")
   item_list = Item.objects. all()
+  logger.debug(f"Found {item_list.count()} items ")
   paginator = Paginator(item_list, 5)
   page_number = request.GET.get("page")
   page_obj = paginator.get_page(page_number)
