@@ -23,3 +23,9 @@ class ItemForm(forms.ModelForm):
         "required": False,
         }),
     }
+  
+  def clean_item_price(self):
+    price = self.cleaned_data["item_price"]
+    if price < 0:
+      raise forms.ValidationError("Price cannot be negative")
+    return price
