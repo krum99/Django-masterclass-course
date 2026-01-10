@@ -13,7 +13,8 @@
           <div>{{ item.item_desc|lower|truncatechars:30 }}</div>
           <div>{{ item.user_name }}</div>
           <div>{{ item.created_at|timesince }} ago</div>
-          <div class="font-bold text-green-700">{{ item.item_price|add:1|floatformat:2|currency }}</div>
+          <div class="font-bold text-green-700">{{ item.item_price|currency }}</div>
+          <div>Discounted price: {{ item.item_price|discount:10 }}</div>
         </div>
         <div>
           <a class="bg-red-500 text-white font-bold px-4 py-2 rounded-md" href="{% url 'myapp:detail' item.id %}">View Details</a>
