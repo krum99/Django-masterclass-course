@@ -8,11 +8,12 @@ from django.urls import reverse_lazy
 from django.core.paginator import Paginator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
-import logging
+from django.shortcuts import get_object_or_404
 
 from .models import Item
 from .forms import ItemForm
-# Create your views here.
+
+import logging
 
 logger = logging.getLogger(__name__)
 
@@ -38,12 +39,18 @@ class IndexClassView(ListView):
   template_name = "myapp/index.html"
   context_object_name = 'item_list'
 
-# def detail (request, id):
-#   item = Item.objects.get(id=id)
-#   context = {
-#     'item': item
-#   }
-#   return render(request, 'myapp/detail.html', context)
+def detail (request, id):
+  logger.info(f"Fetching an item with id: {id}")
+  try:
+    item = get_object_or_404(Item, pk=id)
+    logger.debug(f"Item found {item.item_name} ($ {item.item_price})")
+  except Exception as e:
+    logger.error(f"Error fetching the item %s: %s", id, e)
+    raise 
+  context = {
+    'item': item
+  } 
+  return render(request, 'myapp/detail.html', context)
 
 class FoodDetail(DetailView):
   model = Item
