@@ -35,6 +35,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ product.title }}</h5>
                             <p class="card-text">${{ product.price }}</p>
+                            <button class="btn">
+                                <a href="{% url 'detail' product.id %}">Details</a>
+                            </button>
                         </div>
                         <div class="card-footer">
                             <a href="#" class="btn btn-primary">Add to Cart</a>
