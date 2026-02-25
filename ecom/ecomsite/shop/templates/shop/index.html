@@ -41,7 +41,7 @@
                             </button>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                            <button id="{{ product.id }}" class="btn btn-primary atc">Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -71,6 +71,17 @@
 <script type="text/javascript">
     if(localStorage.getItem('cart') == null){
     var cart = {};
+    }else{
+    var cart = JSON.parse(localStorage.getItem('cart'));
     }
+    $(document).on('click', '.atc', function(){
+        var product_id = $(this).attr('id');
+        if(cart[product_id] == undefined){
+            cart[product_id] = 1;
+        }else{
+            cart[product_id]++;
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+    })
 
 </script>
