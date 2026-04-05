@@ -22,7 +22,7 @@ def save_profile(request):
         # Step 2: Save data into database
         profile = Profile(name=name,email=email,phone=phone,degree=degree,school=school,university=university,summary=summary,previous_work=previous_work,skills=skills)
         profile.save()
-        return redirect('/')
+        return redirect('dashboard')
 
     return render(request,'myapp/accept.html')
 
