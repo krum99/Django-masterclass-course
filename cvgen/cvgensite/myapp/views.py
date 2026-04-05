@@ -8,7 +8,7 @@ import io
 
 def dashboard(request):
     resumes = Profile.objects.all()
-    return render(request,'myapp/dashboard.html',{'resumes':resumes})
+    return render(request,'myapp/modern-dashboard.html',{'resumes':resumes})
 
 def save_profile(request):
     if request.method=="POST":
@@ -27,11 +27,11 @@ def save_profile(request):
         profile.save()
         return redirect('dashboard')
 
-    return render(request,'myapp/accept.html')
+    return render(request,'myapp/modern_create_profile.html')
 
 def resume(request,id):
     user_profile = Profile.objects.get(id=id)
-    return render(request,'myapp/resume.html',{'user_profile':user_profile})
+    return render(request,'myapp/modern-resume.html',{'user_profile':user_profile})
 
 def download_resume(request,id):
     user_profile = get_object_or_404(Profile,id=id)
