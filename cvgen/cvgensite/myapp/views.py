@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 
 from .models import Profile
 
+
+def dashboard(request):
+    resumes = Profile.objects.all()
+    return render(request,'myapp/dashboard.html',{'resumes':resumes})
+
 def save_profile(request):
     if request.method=="POST":
         # Step1: Get the data from the form
