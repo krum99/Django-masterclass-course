@@ -35,11 +35,21 @@ def item_list_api(request):
       return Response(serializer.data) 
 
 
-@api_view(["GET"])
+@api_view(["GET", "PUT", "DELETE"])
 def item_detail_api(request, pk):
   item = Item.objects.get(pk=pk)
-  serializer = ItemSerializer(item)
-  return Response(serializer.data)
+
+  if request.method == "GET":
+    serializer = ItemSerializer(item)
+    return Response(serializer.data)
+  elif request.method == "PUT":
+    serializer = ItemSerializer(item, data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data)
+  elif request.method == "DELETE":
+    item.delete()
+    return Response({"message": "Item deleted"})
 
 
 def item_list_json(request):
