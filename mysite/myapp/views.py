@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -11,12 +11,26 @@ from django.views.decorators.vary import vary_on_headers
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 
+from .serializers import ItemSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
 from .models import Item
 from .forms import ItemForm
 
 import logging
 
 logger = logging.getLogger(__name__)
+
+@api_view(["GET"])
+def item_list_api(request):
+  items = Item.objects.all()
+  serializer = ItemSerializer(items, many=True)
+  return Response(serializer.data)
+
+def item_list_json(request):
+  items = Item.objects.all().values("id", "item_name", "item_desc", "item_price")
+  return JsonResponse(list(items), safe=False)
 
 # @cache_page(60 * 15)
 # @vary_on_headers("User-Agent")
