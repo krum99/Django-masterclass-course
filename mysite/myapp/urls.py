@@ -8,6 +8,8 @@ app_name='myapp'
 urlpatterns = [
   # URL api build with DRF
   path('items-api/', views.item_list_api, name='item_list_api' ),
+  #URL pattern for single item
+  path('api/items/<int:pk>/', views.item_detail_api, name='item_detail_api' ),
   # URL api
   path('items-json/', views.item_list_json, name='item_list_json' ),
   #Django app urls

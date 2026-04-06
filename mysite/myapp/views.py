@@ -22,11 +22,25 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-@api_view(["GET"])
+@api_view(["GET", "POST"])
 def item_list_api(request):
-  items = Item.objects.all()
-  serializer = ItemSerializer(items, many=True)
+  if request.method == "GET":
+    items = Item.objects.all()
+    serializer = ItemSerializer(items, many=True)
+    return Response(serializer.data)
+  elif request.method == "POST":
+    serializer = ItemSerializer(data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data) 
+
+
+@api_view(["GET"])
+def item_detail_api(request, pk):
+  item = Item.objects.get(pk=pk)
+  serializer = ItemSerializer(item)
   return Response(serializer.data)
+
 
 def item_list_json(request):
   items = Item.objects.all().values("id", "item_name", "item_desc", "item_price")
