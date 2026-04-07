@@ -21,6 +21,8 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticate
 from rest_framework.authentication import TokenAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from .permissions import IsOwnerOrReadOnly
+
 from .models import Item
 from .forms import ItemForm
 
@@ -61,7 +63,7 @@ class ItemViewSet(viewsets.ModelViewSet):
   queryset = Item.objects.all()
   serializer_class = ItemSerializer
   authentication_classes = [JWTAuthentication]
-  permission_classes = [IsAuthenticatedOrReadOnly]
+  permission_classes = [IsOwnerOrReadOnly]
 
 
 class ItemRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
