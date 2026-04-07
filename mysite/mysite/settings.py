@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'rest_framework',
+    'rest_framework.authtoken',
     'users.apps.UsersConfig',
     'myapp.apps.MyappConfig',
     'django.contrib.admin',
@@ -172,9 +173,12 @@ LOGGING = {
 
 REST_FRAMEWORK = {
   "DEFAULT_AUTHENTICATION_CLASSES": [
-    "rest_framework.authentication.SessionAuthentication",
+    "rest_framework.authentication.TokenAuthentication",
   ],
   "DEFAULT_PERMISSION_CLASSES": [
     "rest_framework.permissions.AllowAny",
   ]
 }
+
+#token for krum2: 7d3774cbed63b098f95aed779f73ad2c1a0d7506
+# set this as Authorization header in requests that require authentication
