@@ -52,9 +52,6 @@ def item_detail_api(request, pk):
     return Response({"message": "Item deleted"})
 
 
-def item_list_json(request):
-  items = Item.objects.all().values("id", "item_name", "item_desc", "item_price")
-  return JsonResponse(list(items), safe=False)
 
 # @cache_page(60 * 15)
 # @vary_on_headers("User-Agent")
