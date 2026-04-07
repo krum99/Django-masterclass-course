@@ -65,6 +65,10 @@ class ItemViewSet(viewsets.ModelViewSet):
   authentication_classes = [JWTAuthentication]
   permission_classes = [IsOwnerOrReadOnly]
 
+  def perform_create(self, serializer):
+    serializer.save(user_name=self.request.user)
+    return
+
 
 class ItemRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
   queryset = Item.objects.all()
