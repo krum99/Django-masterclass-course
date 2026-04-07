@@ -17,6 +17,7 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated 
 
 from .models import Item
 from .forms import ItemForm
@@ -57,6 +58,7 @@ class ItemListCreateAPI(generics.ListCreateAPIView):
 class ItemViewSet(viewsets.ModelViewSet):
   queryset = Item.objects.all()
   serializer_class = ItemSerializer
+  permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class ItemRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
