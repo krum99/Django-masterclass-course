@@ -16,6 +16,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import generics
+from rest_framework import viewsets
 
 from .models import Item
 from .forms import ItemForm
@@ -52,6 +53,11 @@ class ItemListCreateAPI(generics.ListCreateAPIView):
 #     if serializer.is_valid():
 #       serializer.save()
 #       return Response(serializer.data) 
+
+class ItemViewSet(viewsets.ModelViewSet):
+  queryset = Item.objects.all()
+  serializer_class = ItemSerializer
+
 
 class ItemRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
   queryset = Item.objects.all()
