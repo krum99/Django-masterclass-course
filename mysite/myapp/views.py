@@ -23,6 +23,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from .permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 
 from .models import Item
 from .forms import ItemForm
@@ -69,6 +70,8 @@ class ItemViewSet(viewsets.ModelViewSet):
   filterset_fields = ["item_name", "item_price"]
   ordering_fields = ["item_name", "item_price"] # control filtering and ordering from the url 
   search_fields = ["item_name", "item_desc"] # example: add ?search=buger in the url
+  throttle_classes = [AnonRateThrottle, UserRateThrottle]
+
   def perform_create(self, serializer):
     serializer.save(user_name=self.request.user)
     return
