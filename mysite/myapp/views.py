@@ -20,8 +20,8 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
-
 from .permissions import IsOwnerOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Item
 from .forms import ItemForm
@@ -64,6 +64,8 @@ class ItemViewSet(viewsets.ModelViewSet):
   serializer_class = ItemSerializer
   authentication_classes = [JWTAuthentication]
   permission_classes = [IsOwnerOrReadOnly]
+  filter_backends = [DjangoFilterBackend]
+  filterset_fields = ["item_name", "item_price"]
 
   def perform_create(self, serializer):
     serializer.save(user_name=self.request.user)
