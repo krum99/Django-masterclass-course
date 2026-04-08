@@ -13,3 +13,8 @@ class ItemSerializer(serializers.ModelSerializer):
   class Meta:
     model = Item
     fields = ["id", "user_name", "item_name", "item_desc", "item_price", "item_image"]
+
+  def validate_item_price(self, value):
+    if value < 0:
+      raise serializers.ValidationError("Price must greater than zero!")
+    return value
