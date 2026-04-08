@@ -89,3 +89,6 @@ $RECYCLE.BIN/
 #local pictures folder
 pictures/
 profile_pictures/
+
+#cache
+cache/
