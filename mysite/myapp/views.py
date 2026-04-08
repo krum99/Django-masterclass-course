@@ -22,7 +22,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import OrderingFilter, SearchFilter
 
 from .models import Item
 from .forms import ItemForm
@@ -65,10 +65,10 @@ class ItemViewSet(viewsets.ModelViewSet):
   serializer_class = ItemSerializer
   authentication_classes = [JWTAuthentication]
   permission_classes = [IsOwnerOrReadOnly]
-  filter_backends = [DjangoFilterBackend, OrderingFilter]
+  filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
   filterset_fields = ["item_name", "item_price"]
   ordering_fields = ["item_name", "item_price"] # control filtering and ordering from the url 
-
+  search_fields = ["item_name", "item_desc"] # example: add ?search=buger in the url
   def perform_create(self, serializer):
     serializer.save(user_name=self.request.user)
     return
