@@ -10,8 +10,6 @@ from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-
-from .serializers import ItemSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
@@ -25,12 +23,18 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 
-from .models import Item
+from .models import Item, Order
+from .serializers import ItemSerializer, OrderSerializer
 from .forms import ItemForm
 
 import logging
 
 logger = logging.getLogger(__name__)
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+  queryset = Order.objects.all()
+  serializer_class = OrderSerializer
 
 class ItemListCreateAPI(generics.ListCreateAPIView):
   queryset = Item.objects.all()
