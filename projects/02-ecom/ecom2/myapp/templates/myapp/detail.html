@@ -34,9 +34,28 @@
       {% else %}
         <p class="text-sm text-green-700">Out of stock</p>
       {% endif %}
-      <button class="w-full bg-yellow-400 text-black font-semibold py-2 rounded-lg">Add to cart</button>
+      <button id="atc" value="{{ product.id }}" class="w-full bg-yellow-400 text-black font-semibold py-2 rounded-lg">Add to cart</button>
       <button class="w-full bg-gray-900 text-white font-semibold py-2 rounded-lg">Buy Now</button>
       <p class="text-sm text-green-600">Sold by: ABC Official Store</p>
     </div>
   </div>
+
+  <script>
+    $(document).on('click', '#atc', function (e) {
+      console.log('Add to cart button clicked')
+      $.ajax({
+        type: 'POST',
+        url: '{% url "cart_add" %}',
+        data: {
+          csrfmiddlewaretoken: '{{csrf_token}}',
+          product_id: $('#atc').val(),
+          product_quantity: $('#select option:selected').text()
+        },
+        success: function (json) {
+          console.log(json)
+          document.getElementById('cart-qty').textContent = json.qty
+        }
+      })
+    })
+  </script>
 {% endblock %}
