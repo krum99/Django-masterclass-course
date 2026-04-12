@@ -36,3 +36,6 @@ class Cart():
             item['total'] = item['price']*item['qty']
             
             yield item
+
+    def get_total_price(self):
+        return sum([Decimal(item['total']) for item in self.cart.values()])
