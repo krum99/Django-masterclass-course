@@ -22,3 +22,11 @@ def cart_add(request):
 def cart_overview(request):
     cart = Cart(request)
     return render(request, 'cart/cart-overview.html', {'cart': cart})
+
+def cart_delete(request):
+    cart = Cart(request)
+
+    if request.POST.get("action") == 'post':
+        product_id = request.POST.get('product_id')
+        cart.delete(product_id=product_id)
+        return JsonResponse({'message': 'item deleted'}) 

@@ -39,3 +39,10 @@ class Cart():
 
     def get_total_price(self):
         return sum([Decimal(item['total']) for item in self.cart.values()])
+    
+    def delete(self, product_id):
+        product_id = str(product_id)
+
+        if product_id in self.cart:
+            del self.cart[product_id]
+            self.session.modified = True
