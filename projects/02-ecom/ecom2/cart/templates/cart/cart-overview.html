@@ -96,5 +96,28 @@
         }
       })
     })
+    
+    // Update functionality
+    $(document).on('click', '.update', function (e) {
+      e.preventDefault()
+      var productID = $(this).data('index')
+      var productQTY = $('#select' + productID + ' option:selected').text()
+      console.log(productID)
+      console.log(productQTY)
+    
+      $.ajax({
+        type: 'POST',
+        url: "{% url 'cart_update' %}",
+        data: {
+          product_id: $(this).data('index'),
+          product_quantity: $('#select' + productID + ' option:selected').text(),
+          csrfmiddlewaretoken: '{{csrf_token}}',
+          action: 'post'
+        },
+        success: function (e) {
+          location.reload()
+        }
+      })
+    })
   </script>
 {% endblock %}

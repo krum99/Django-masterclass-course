@@ -46,3 +46,11 @@ class Cart():
         if product_id in self.cart:
             del self.cart[product_id]
             self.session.modified = True
+
+    def update(self, product_id, product_qty):
+        product_id = str(product_id)
+
+        if product_id in self.cart:
+            self.cart[product_id]['qty'] = product_qty
+            self.session.modified = True
+        
