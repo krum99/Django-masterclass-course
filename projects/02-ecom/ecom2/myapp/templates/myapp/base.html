@@ -12,11 +12,11 @@
     <nav class="bg-gray-200 shadow-md px-4 py-2 px-16 flex items-center justify-between">
       <!-- Logo -->
       <div class="flex items-center space-x-2">
-        <!--        <img
+        <!--         <img
           src="https://via.placeholder.com/40"
           alt="Logo"
           class="h-10 w-10"
-        />        -->
+        />         -->
         <span class="text-md font-semibold text-gray-800 px-4">☰ Categories</span>
       </div>
 
@@ -41,11 +41,11 @@
     <nav class="bg-blue-500 shadow-md px-4 py-3 px-16 flex items-center justify-between">
       <!-- Logo -->
       <div class="flex items-center space-x-2">
-        <!--        <img
+        <!--         <img
           src="https://via.placeholder.com/40"
           alt="Logo"
           class="h-10 w-10"
-        />        -->
+        />         -->
         <span class="text-xl font-semibold text-gray-800 px-4">Shop<span class="text-white">Mate</span></span>
       </div>
 
@@ -65,7 +65,7 @@
         <button class="md:hidden text-gray-600 hover:text-blue-600">🔍</button>
 
         <!-- Cart -->
-        <a href="" class="relative">
+        <a href="{% url 'cart-overview' %}" class="relative">
           🛒
           <span id="cart-qty" class="absolute -top-2 -right-2 text-xs bg-red-500 text-white rounded-full px-1">
             {% with qty_amount=cart|length %}
