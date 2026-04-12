@@ -88,6 +88,11 @@
           product_id: $(this).data('index'),
           csrfmiddlewaretoken: '{{csrf_token}}',
           action: 'post'
+        },
+        success: function (json) {
+          location.reload()
+          // document.getElementById("cart-qty").textContent = json.qty;
+          // document.getElementById("total").textContent = json.total;
         }
       })
     })
