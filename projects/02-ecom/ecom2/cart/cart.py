@@ -38,7 +38,7 @@ class Cart():
             yield item
 
     def get_total_price(self):
-        return sum([Decimal(item['total']) for item in self.cart.values()])
+        return sum([Decimal(item['price']) * Decimal(item['qty']) for item in self.cart.values()])
     
     def delete(self, product_id):
         product_id = str(product_id)
