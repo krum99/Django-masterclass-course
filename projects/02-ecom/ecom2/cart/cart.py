@@ -32,6 +32,7 @@ class Cart():
         
         for item in cart.values():
             item['price'] = Decimal(item['price'])
+            item['qty'] = Decimal(item['qty'])
             item['total'] = item['price']*item['qty']
             
             yield item
