@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'myapp',
     'cart',
+    'orders',
     'users',
     'mathfilters',
     'django.contrib.admin',
