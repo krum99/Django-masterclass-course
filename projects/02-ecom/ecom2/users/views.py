@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import CreateUserForm, LoginForm
+from .forms import CreateUserForm, LoginForm, UserUpdateForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes,force_str
 from django.template.loader import render_to_string
@@ -70,3 +70,14 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('index')
+
+def profile(request):
+    
+    if request.method =="POST":
+        user_form = UserUpdateForm(request.POST,instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+            return redirect('index')
+    user_form = UserUpdateForm(instance=request.user)
+
+    return render(request,'users/profile.html',{'user_form':user_form})
