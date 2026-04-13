@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
 from django.contrib.auth.models import User
 from .token import account_activation_token
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate, login, logout 
 
 def register(request):
     form = CreateUserForm()
@@ -66,3 +66,7 @@ def user_login(request):
                 return redirect('index')
             
     return render(request,'users/login.html',{'form':form})
+
+def user_logout(request):
+    logout(request)
+    return redirect('index')

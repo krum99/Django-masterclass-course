@@ -12,11 +12,11 @@
     <nav class="bg-gray-200 shadow-md px-4 py-2 px-16 flex items-center justify-between">
       <!-- Logo -->
       <div class="flex items-center space-x-2">
-        <!--         <img
+        <!--          <img
           src="https://via.placeholder.com/40"
           alt="Logo"
           class="h-10 w-10"
-        />         -->
+        />          -->
         <span class="text-md font-semibold text-gray-800 px-4">☰ Categories</span>
       </div>
 
@@ -41,11 +41,11 @@
     <nav class="bg-blue-500 shadow-md px-4 py-3 px-16 flex items-center justify-between">
       <!-- Logo -->
       <div class="flex items-center space-x-2">
-        <!--         <img
+        <!--          <img
           src="https://via.placeholder.com/40"
           alt="Logo"
           class="h-10 w-10"
-        />         -->
+        />          -->
         <span class="text-xl font-semibold text-gray-800 px-4">Shop<span class="text-white">Mate</span></span>
       </div>
 
@@ -83,6 +83,14 @@
 
         <!-- Hamburger Menu (Mobile) -->
         <button class="md:hidden text-gray-600 hover:text-blue-600">☰</button>
+      </div>
+
+      <div>
+        {% if user.is_authenticated %}
+          <a class="text-white font-bold" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+          <a class="text-white font-bold" href="{% url 'login' %}">Login</a>
+        {% endif %}
       </div>
     </nav>
     <!-- Nav -->
