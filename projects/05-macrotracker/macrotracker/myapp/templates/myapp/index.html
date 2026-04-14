@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <label for="">Select a food item</label>
+      <select name="food" id="food">
+        {% for food in foods %}
+          <option value="{{ food.id }}">{{ food.name }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit">Add</button>
+    </form>
+    <h2>Consumed food</h2>
+    <table id="table">
+      <thead>
+        <tr>
+          <th>Food Item</th>
+          <th>Carbs(g)</th>
+          <th>Protein (g)</th>
+          <th>Fats(g)</th>
+          <th>Calories</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in consumed_food %}
+          <tr>
+            <td>{{ item.food_consumed.name }}</td>
+            <td>{{ item.food_consumed.carbs }}</td>
+            <td>{{ item.food_consumed.protein }}</td>
+            <td>{{ item.food_consumed.fats }}</td>
+            <td>{{ item.food_consumed.caloories }}</td>
+          </tr>
+        {% endfor %}
+        <tr>
+          <td>Total</td>
+          <td id="totalCarbs">0</td>
+          <td id="totalProtein">0</td>
+          <td id="totalFats">0</td>
+          <td id="totalCalories">0</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
