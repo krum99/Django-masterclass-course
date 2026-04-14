@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from .forms import AddressForm
-from .models import Address
-# Create your views here.
+from .models import Address,Order,OrderItem
+from cart.cart import Cart
+from django.http import JsonResponse
 
 def add_address(request):
     try:
@@ -30,4 +31,25 @@ def checkout(request):
         return render(request,'orders/checkout.html')
     
 def place_order(request):
-    pass
+    order_success=False
+    if request.method=="POST":
+        cart = Cart(request)
+        total_amount = cart.get_total_price()
+
+        if request.user.is_authenticated:
+            order = Order.objects.create(user=request.user,total_amount=total_amount)
+            for item in cart:
+                OrderItem.objects.create(order=order,product=item['product'],quantity=item['qty'])
+            order_success=True
+        else:
+            order = Order.objects.create(total_amount=total_amount)
+            for item in cart:
+                OrderItem.objects.create(order=order,product=item['product'],quantity=item['qty'])               
+            order_success=True
+    return JsonResponse({'success':order_success})
+
+def order_success(request):
+    return render(request,'orders/order-success.html')
+
+def order_failed(request):
+    return render(request,'orders/order-failed.html')

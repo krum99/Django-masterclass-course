@@ -40,6 +40,12 @@
         data: {
           csrfmiddlewaretoken: '{{csrf_token}}',
           action: 'post'
+        },
+        success: function (json) {
+          window.location.replace("{% url 'order-success' %}")
+        },
+        error: function () {
+          window.location.replace("{% url 'order-failed' %}")
         }
       })
     })
