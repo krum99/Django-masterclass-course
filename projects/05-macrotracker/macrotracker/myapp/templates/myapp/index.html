@@ -49,4 +49,22 @@
       </tbody>
     </table>
   </body>
+  <script>
+    let table = document.getElementById('table')
+    let carbs = 0,
+      protein = 0,
+      fats = 0,
+      calories = 0
+    for (let i = 1; i < table.rows.length; i++) {
+      carbs += parseFloat(table.rows[i].cells[1].innerText)
+      protein += parseFloat(table.rows[i].cells[2].innerText)
+      fats += parseFloat(table.rows[i].cells[3].innerText)
+      calories += parseFloat(table.rows[i].cells[4].innerText)
+    }
+    
+    document.getElementById('totalCarbs').innerHTML = Math.trunc(carbs)
+    document.getElementById('totalProtein').innerHTML = Math.trunc(protein)
+    document.getElementById('totalFats').innerHTML = Math.trunc(fats)
+    document.getElementById('totalCalories').innerHTML = Math.trunc(calories)
+  </script>
 </html>
