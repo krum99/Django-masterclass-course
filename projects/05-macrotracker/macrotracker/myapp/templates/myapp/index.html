@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Document</title>
   </head>
   <body>
@@ -51,6 +52,10 @@
         </tr>
       </tbody>
     </table>
+
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
   </body>
   <script>
     // CALCULATE TOTAL AMOUNT OF FOOD ATTRIBUTES
@@ -76,5 +81,33 @@
     let caloriePercent = (calories / TARGET_CALORIES) * 100
     console.log('calorie percent', caloriePercent)
     document.getElementById('calorie-progress').setAttribute('class', 'bg-green-500 h-6 w-[' + caloriePercent + '%] rounded-full')
+    
+    //Chart logic
+    let totalMacros = carbs + protein + fats
+    let carbsPerentage = Math.round((carbs / totalMacros) * 100)
+    let proteinPerentage = Math.round((protein / totalMacros) * 100)
+    let fatsPerentage = Math.round((fats / totalMacros) * 100)
+    const ctx = document.getElementById('myChart')
+    
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Carbs', 'Protein', 'Fats'],
+        datasets: [
+          {
+            label: '%',
+            data: [carbsPerentage, proteinPerentage, fatsPerentage],
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    })
   </script>
 </html>
