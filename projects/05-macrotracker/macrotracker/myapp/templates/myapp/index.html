@@ -41,6 +41,9 @@
             <td>{{ item.food_consumed.protein }}</td>
             <td>{{ item.food_consumed.fats }}</td>
             <td>{{ item.food_consumed.calories }}</td>
+            <td>
+              <a href="{% url 'delete' item.id %}">Delete</a>
+            </td>
           </tr>
         {% endfor %}
         <tr>
