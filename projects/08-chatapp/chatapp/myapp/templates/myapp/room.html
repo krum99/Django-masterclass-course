@@ -1,10 +1,14 @@
 <h2>this is a {{ chatroom.name }} chatroom</h2>
 {{chatroom.slug|json_script:"json-chatroomname"}}
+{{request.user.username|json_script:"json-username"}}
 <form action="" method="post">
-  <input type="text" name="message" placeholder="Enter a message" />
-  <button type="submit">Send</button>
+  <input type="text" name="message" placeholder="Enter a message"  id="message-input"/>
+  <button type="submit" id="send-button">Send</button>
 </form>
 <script>
+    const username = JSON.parse(
+    document.getElementById("json-username").textContent
+  );
   const chatRoomName = JSON.parse(
     document.getElementById("json-chatroomname").textContent
   );
@@ -16,5 +20,22 @@
   };
   chatSocket.onclose = function (e) {
     console.log("Socket closed");
+  };
+
+    document.getElementById("send-button").onclick = function (e) {
+    e.preventDefault();
+    const messageInput = document.getElementById("message-input");
+
+    const message = messageInput.value;
+
+    chatSocket.send(
+      JSON.stringify({
+        message: message,
+        username: username,
+        room: chatRoomName,
+      })
+    );
+
+    messageInput.value = "";
   };
 </script>
