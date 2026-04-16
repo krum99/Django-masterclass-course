@@ -2,6 +2,9 @@
 {{chatroom.slug|json_script:"json-chatroomname"}}
 {{request.user.username|json_script:"json-username"}}
 <div id="chat-messages">
+  {% for message in messages  %}
+  {{message.user.username}}: {{message.message}} </br>
+  {% endfor %}
 </div>
 <form action="" method="post">
   <input type="text" name="message" placeholder="Enter a message"  id="message-input"/>
