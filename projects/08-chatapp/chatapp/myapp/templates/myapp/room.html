@@ -1,6 +1,8 @@
 <h2>this is a {{ chatroom.name }} chatroom</h2>
 {{chatroom.slug|json_script:"json-chatroomname"}}
 {{request.user.username|json_script:"json-username"}}
+<div id="chat-messages">
+</div>
 <form action="" method="post">
   <input type="text" name="message" placeholder="Enter a message"  id="message-input"/>
   <button type="submit" id="send-button">Send</button>
@@ -17,6 +19,14 @@
   );
   chatSocket.onmessage = function (e) {
     console.log("This is a message");
+    const data = JSON.parse(e.data);
+    if (data.message) {
+      console.log("Recieved message to the client is: ", data.message);
+      let html = data.username + ":" + data.message + "</br>";
+      document.getElementById("chat-messages").innerHTML += html;
+    } else {
+      alert("The message was empty");
+    }
   };
   chatSocket.onclose = function (e) {
     console.log("Socket closed");
