@@ -1,0 +1,3 @@
+index page{% for chatroom in chatrooms %}
+  <a href="{{ chatroom.slug }}">{{ chatroom.name }}</a>
+{% endfor %}
