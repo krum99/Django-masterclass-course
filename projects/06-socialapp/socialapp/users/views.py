@@ -20,3 +20,6 @@ def user_login(request):
     else:
         form = LoginForm()
     return render(request, 'users/login.html', {'form': form})
+
+def index(request):
+    return render(request, 'users/index.html')
