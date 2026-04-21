@@ -92,3 +92,6 @@ profile_pictures/
 
 #cache
 cache/
+
+#node_modules
+node_modules/
