@@ -92,3 +92,9 @@ profile_pictures/
 
 #cache
 cache/
+
+#node_modules
+node_modules/
+
+#Compiled tailwind files
+styles.css
