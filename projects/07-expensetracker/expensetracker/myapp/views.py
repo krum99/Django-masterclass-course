@@ -58,7 +58,7 @@ def index(request):
 
     context = {"expense_form": expense_form, "expenses": expenses, **summary}
 
-    return render(request, "myapp/index.html", context)
+    return render(request, "myapp/dark-modern-index.html", context)
 
 
 def edit(request, id):
@@ -69,7 +69,7 @@ def edit(request, id):
         if form.is_valid():
             form.save()
             return redirect("index")
-    return render(request, "myapp/edit.html", {"expense_form": expense_form})
+    return render(request, "myapp/modern-edit.html", {"expense_form": expense_form})
 
 
 def delete(request, id):
