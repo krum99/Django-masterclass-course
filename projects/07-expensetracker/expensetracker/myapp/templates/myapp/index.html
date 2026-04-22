@@ -1,4 +1,21 @@
 {% extends 'myapp/base.html' %}
 {% block body %}
   <h1>index page</h1>
+  <form action="" method="POST">
+    <h2>Add Expense</h2>
+    {% csrf_token %}
+    <div>
+      <label for="">Expense Name</label>
+      {{ expense_form.name }}
+    </div>
+    <div>
+      <label for="">Expense Amount</label>
+      {{ expense_form.amount }}
+    </div>
+    <div>
+      <label for="">Expense Category</label>
+      {{ expense_form.category }}
+    </div>
+    <button type="submit">Add</button>
+  </form>
 {% endblock %}
