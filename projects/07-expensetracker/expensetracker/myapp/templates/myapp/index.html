@@ -99,4 +99,87 @@
       </tbody>
     </table>
   </div>
+
+  <div>
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
+    <div>
+      <canvas id="myChart1"></canvas>
+    </div>
+  </div>
+  <script>
+    const categories = []
+    const expenses = []
+    const catSumDiv = document.getElementById('cat-table').getElementsByTagName('td')
+    
+    for (i = 0; i < catSumDiv.length; i++) {
+      if (i % 2 == 0) {
+        categories.push(catSumDiv[i].innerText)
+      } else {
+        expenses.push(catSumDiv[i].innerText)
+      }
+    }
+    console.log('categories', categories)
+    console.log('expenses', expenses)
+    
+    const ctx = document.getElementById('myChart')
+    
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: categories,
+        datasets: [
+          {
+            label: 'Expenses',
+            data: expenses,
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    })
+    
+    const dates = []
+    const daily_expenses = []
+    const dailySumDiv = document.getElementById('daily-sums').getElementsByTagName('td')
+    
+    for (i = 0; i < dailySumDiv.length; i++) {
+      if (i % 2 == 0) {
+        dates.push(dailySumDiv[i].innerText)
+      } else {
+        daily_expenses.push(dailySumDiv[i].innerText)
+      }
+    }
+    console.log('date', dates)
+    console.log('daily expenses', daily_expenses)
+    const ctx1 = document.getElementById('myChart1')
+    
+    new Chart(ctx1, {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [
+          {
+            label: 'Expenses',
+            data: daily_expenses,
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    })
+  </script>
 {% endblock %}
