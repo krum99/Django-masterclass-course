@@ -22,11 +22,20 @@ def get_expense_summary():
     data = Expense.objects.filter(date__gt=last_week)
     weekly_sum = data.aggregate(Sum("amount"))["amount__sum"]
 
+    # Calculating daily sum
+    daily_sums = (
+        Expense.objects.filter()
+        .values("date")
+        .order_by("date")
+        .annotate(sum=Sum("amount"))
+    )
+
     return {
         "total_expenses": total_expenses,
         "yearly_sum": yearly_sum,
         "monthly_sum": monthly_sum,
         "weekly_sum": weekly_sum,
+        "daily_sums": daily_sums,
     }
 
 

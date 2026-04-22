@@ -62,5 +62,23 @@
         </tr>
       </tbody>
     </table>
+
+    <h2>Daily sums</h2>
+    <table id="daily-sums">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Total Sales</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in daily_sums %}
+          <tr>
+            <td>{{ entry.date }}</td>
+            <td>{{ entry.sum }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 {% endblock %}
