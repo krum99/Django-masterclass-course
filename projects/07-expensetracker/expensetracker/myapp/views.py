@@ -30,12 +30,18 @@ def get_expense_summary():
         .annotate(sum=Sum("amount"))
     )
 
+    # Sums per category
+    categorical_sums = (
+        Expense.objects.filter().values("category").annotate(sum=Sum("amount"))
+    )
+
     return {
         "total_expenses": total_expenses,
         "yearly_sum": yearly_sum,
         "monthly_sum": monthly_sum,
         "weekly_sum": weekly_sum,
         "daily_sums": daily_sums,
+        "categorical_sums": categorical_sums,
     }
 
 

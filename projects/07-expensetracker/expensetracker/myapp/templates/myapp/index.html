@@ -80,5 +80,23 @@
         {% endfor %}
       </tbody>
     </table>
+
+    <h2>Category sums</h2>
+    <table id="cat-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Total Sales</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in categorical_sums %}
+          <tr>
+            <td>{{ entry.category }}</td>
+            <td>{{ entry.sum }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 {% endblock %}
