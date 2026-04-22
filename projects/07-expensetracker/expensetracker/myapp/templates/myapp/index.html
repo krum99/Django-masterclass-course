@@ -2,6 +2,11 @@
 {% load humanize %}
 {% block body %}
   <h1>index page</h1>
+  <div>
+    <p>Yearly Expenses:{{ yearly_sum|intcomma }}</p>
+    <p>Monthly Expenses:{{ monthly_sum|intcomma }}</p>
+    <p>Weekly Expenses:{{ weekly_sum|intcomma }}</p>
+  </div>
   <form action="" method="POST">
     <h2>Add Expense</h2>
     {% csrf_token %}
