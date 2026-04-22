@@ -18,4 +18,31 @@
     </div>
     <button type="submit">Add</button>
   </form>
+
+  <div>
+    <h1>Expenses</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for expense in expenses %}
+          <tr>
+            <td>{{ expense.date }}</td>
+            <td>{{ expense.name }}</td>
+            <td>{{ expense.category }}</td>
+            <td>{{ expense.amount }}</td>
+            <td>
+              <a href="{% url 'edit' expense.id %}">Modify</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}

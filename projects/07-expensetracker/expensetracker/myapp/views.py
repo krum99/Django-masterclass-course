@@ -12,8 +12,9 @@ def index(request):
       expense_form.save()
   else:
     expense_form = ExpenseForm()
-  
-  return render(request, 'myapp/index.html', {'expense_form': expense_form})
+    
+  expenses = Expense.objects.all()
+  return render(request, 'myapp/index.html', {'expense_form': expense_form, 'expenses': expenses})
 
 def edit(request, id):
   expense = Expense.objects.get(id=id)
