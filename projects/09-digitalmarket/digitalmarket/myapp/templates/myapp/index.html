@@ -1,1 +1,10 @@
-Index page
+{% extends 'myapp/base.html' %}
+{% block body %}
+  <h1>products:</h1>
+  {% for product in products %}
+    {{ product.name }}
+    {{ product.description }}
+    {{ product.price }}
+    <br />
+  {% endfor %}
+{% endblock %}
