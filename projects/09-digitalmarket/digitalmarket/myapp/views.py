@@ -3,7 +3,9 @@ from .models import Product, OrderDetail
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseNotFound
+from django.shortcuts import get_object_or_404
+
 
 import stripe, json
 
@@ -57,3 +59,17 @@ def create_checkout_session(request, id):
     order.save()
 
     return JsonResponse({"sessionId": checkout_session.id})
+
+
+def payment_success_view(request):
+    session_id = request.GET.get("session_id")
+    if session_id is None:
+        return HttpResponseNotFound()
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    session = stripe.checkout.Session.retrieve(session_id)
+    order = get_object_or_404(OrderDetail, stripe_payment_intent=session.payment_intent)
+    order.has_paid = True
+    order.save()
+
+    return render(request, "myapp/payment_success.html", {"order": order})
