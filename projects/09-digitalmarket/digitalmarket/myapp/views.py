@@ -46,7 +46,7 @@ def create_checkout_session(request, id):
             }
         ],
         mode="payment",
-        success_url=request.build_abosolute_url(reverse("success"))
+        success_url=request.build_absolute_uri(reverse("success"))
         + "?session_id={CHECKOUT_SESSION_ID}",
         cancel_url=request.build_absolute_uri(reverse("failed")),
     )
