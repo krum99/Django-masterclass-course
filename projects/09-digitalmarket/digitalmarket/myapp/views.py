@@ -54,7 +54,7 @@ def create_checkout_session(request, id):
     order = OrderDetail()
     order.customer_email = request_data["email"]
     order.product = product
-    order.stripe_payment_intent = checkout_session["payment_intent"]
+    order.stripe_payment_intent = checkout_session.id
     order.amount = int(product.price)
     order.save()
 
@@ -68,7 +68,7 @@ def payment_success_view(request):
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
     session = stripe.checkout.Session.retrieve(session_id)
-    order = get_object_or_404(OrderDetail, stripe_payment_intent=session.payment_intent)
+    order = get_object_or_404(OrderDetail, stripe_payment_intent=session.id)
     order.has_paid = True
     order.save()
 
