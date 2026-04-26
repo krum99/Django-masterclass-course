@@ -29,7 +29,7 @@ def detail(request, id):
 def create_checkout_session(request, id):
     request_data = json.loads(request.body)
     product = Product.objects.get(id=id)
-    stripe_api_key = settings.STRIPE_SECRET_KEY
+    stripe.api_key = settings.STRIPE_SECRET_KEY
     checkout_session = stripe.checkout.Session.create(
         customer_email=request_data["email"],
         payment_method_types=["card"],
