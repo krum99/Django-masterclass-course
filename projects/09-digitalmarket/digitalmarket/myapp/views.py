@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Product, OrderDetail
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.http import JsonResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404
-
+from .forms import ProductForm
 
 import stripe, json
 
@@ -77,3 +77,14 @@ def payment_success_view(request):
 
 def payment_failed_view(request):
     return render(request, "myapp/failed.html")
+
+
+def create_product(request):
+    if request.method == "POST":
+        product_form = ProductForm(request.POST, request.FILES)
+        breakpoint()
+        if product_form.is_valid():
+            product_form.save()
+            return redirect("index")
+    product_form = ProductForm()
+    return render(request, "myapp/create_product.html", {"product_form": product_form})

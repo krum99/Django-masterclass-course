@@ -12,4 +12,5 @@ urlpatterns = [
         views.create_checkout_session,
         name="api_checkout_session",
     ),
+    path("createproduct/", views.create_product, name="createproduct"),
 ]
