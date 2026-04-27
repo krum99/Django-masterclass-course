@@ -13,4 +13,5 @@ urlpatterns = [
         name="api_checkout_session",
     ),
     path("createproduct/", views.create_product, name="createproduct"),
+    path("editproduct/<int:id>/", views.product_edit, name="editproduct"),
 ]
