@@ -82,7 +82,6 @@ def payment_failed_view(request):
 def create_product(request):
     if request.method == "POST":
         product_form = ProductForm(request.POST, request.FILES)
-        breakpoint()
         if product_form.is_valid():
             product_form.save()
             return redirect("index")
