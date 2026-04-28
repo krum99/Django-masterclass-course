@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.http import JsonResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404
-from .forms import ProductForm
+from .forms import ProductForm, UserRegistrationForm
 
 import stripe, json
 
@@ -118,3 +118,8 @@ def product_delete(request, id):
 def dashboard(request):
     products = Product.objects.all()
     return render(request, "myapp/dashboard.html", {"products": products})
+
+
+def register(request):
+    user_form = UserRegistrationForm()
+    return render(request, "myapp/register.html", {"user_form": user_form})
