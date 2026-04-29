@@ -28,4 +28,5 @@ urlpatterns = [
         auth_views.LogoutView.as_view(template_name="myapp/logout.html"),
         name="logout",
     ),
+    path("invalid/", views.invalid, name="invalid"),
 ]
