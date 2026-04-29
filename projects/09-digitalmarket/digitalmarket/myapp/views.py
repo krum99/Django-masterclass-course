@@ -113,6 +113,8 @@ def product_edit(request, id):
 
 def product_delete(request, id):
     product = Product.objects.get(id=id)
+    if product.seller != request.user:
+        return redirect("invalid")
     if request.method == "POST":
         product.delete()
         return redirect("index")
