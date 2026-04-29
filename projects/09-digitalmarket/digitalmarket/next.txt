@@ -1,0 +1,3 @@
+1. implement rating system: each user should be able to rate a product and
+hence each product should have rating value based on all evaluations.
+2. implement orders screen 
