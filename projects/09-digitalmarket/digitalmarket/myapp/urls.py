@@ -30,4 +30,5 @@ urlpatterns = [
     ),
     path("invalid/", views.invalid, name="invalid"),
     path("purchases/", views.my_pruchases, name="purchases"),
+    path("sales/", views.sales, name="sales"),
 ]

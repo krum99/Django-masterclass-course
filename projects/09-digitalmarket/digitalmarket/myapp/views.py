@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.http import JsonResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404
 from .forms import ProductForm, UserRegistrationForm
+from django.db.models import Sum
 
 import stripe, json
 
@@ -151,3 +152,9 @@ def invalid(request):
 def my_pruchases(request):
     orders = OrderDetail.objects.filter(customer_email=request.user.email)
     return render(request, "myapp/purchases.html", {"orders": orders})
+
+
+def sales(request):
+    orders = OrderDetail.objects.filter(product__seller=request.user)
+    total_sales = orders.aggregate(Sum("amount"))
+    return render(request, "myapp/sales.html", {"total_sales": total_sales})
