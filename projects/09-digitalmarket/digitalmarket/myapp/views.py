@@ -93,6 +93,8 @@ def create_product(request):
 
 def product_edit(request, id):
     product = Product.objects.get(id=id)
+    if product.seller != request.user:
+        return redirect("invalid")
     product_form = ProductForm(
         request.POST or None, request.FILES or None, instance=product
     )
