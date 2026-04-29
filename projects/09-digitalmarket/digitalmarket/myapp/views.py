@@ -70,6 +70,12 @@ def payment_success_view(request):
     session = stripe.checkout.Session.retrieve(session_id)
     order = get_object_or_404(OrderDetail, stripe_payment_intent=session.id)
     order.has_paid = True
+    # updating sales stat for a product
+    product = Product.objects.get(id=order.product.id)
+    product.total_sales_amount += int(product.price)
+    product.total_sales += 1
+    product.save()
+    # updating sales stat for a product
     order.save()
 
     return render(request, "myapp/payment_success.html", {"order": order})
