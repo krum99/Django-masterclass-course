@@ -22,5 +22,5 @@ class OrderDetail(models.Model):
     stripe_payment_intent = models.CharField(max_length=200)
 
     has_paid = models.BooleanField(default=False)
-    craeted_on = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True)
