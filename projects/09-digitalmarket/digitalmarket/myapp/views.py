@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from .forms import ProductForm, UserRegistrationForm
 from django.db.models import Sum
 
-import stripe, json
+import stripe, json, datetime
 
 
 def index(request):
@@ -157,4 +157,38 @@ def my_pruchases(request):
 def sales(request):
     orders = OrderDetail.objects.filter(product__seller=request.user)
     total_sales = orders.aggregate(Sum("amount"))
-    return render(request, "myapp/sales.html", {"total_sales": total_sales})
+
+    # yearly
+    last_year = datetime.date.today() - datetime.timedelta(days=365)
+    data = OrderDetail.objects.filter(
+        product__seller=request.user,
+        created_on__gt=last_year,
+    )
+    yearly_sales = data.aggregate(Sum("amount"))
+
+    # monthly
+    last_month = datetime.date.today() - datetime.timedelta(days=30)
+    data = OrderDetail.objects.filter(
+        product__seller=request.user,
+        created_on__gt=last_month,
+    )
+    monthly_sales = data.aggregate(Sum("amount"))
+
+    # weekly
+    last_week = datetime.date.today() - datetime.timedelta(days=7)
+    data = OrderDetail.objects.filter(
+        product__seller=request.user,
+        created_on__gt=last_week,
+    )
+    weekly_sales = data.aggregate(Sum("amount"))
+
+    return render(
+        request,
+        "myapp/sales.html",
+        {
+            "total_sales": total_sales,
+            "yearly_sales": yearly_sales,
+            "monthly_sales": monthly_sales,
+            "weekly_sales": weekly_sales,
+        },
+    )
