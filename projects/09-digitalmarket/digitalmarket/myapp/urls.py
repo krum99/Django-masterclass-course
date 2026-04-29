@@ -29,4 +29,5 @@ urlpatterns = [
         name="logout",
     ),
     path("invalid/", views.invalid, name="invalid"),
+    path("purchases/", views.my_pruchases, name="purchases"),
 ]
