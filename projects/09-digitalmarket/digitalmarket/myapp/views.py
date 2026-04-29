@@ -189,7 +189,13 @@ def sales(request):
         .order_by("created_on__date")
         .annotate(sum=Sum("amount"))
     )
-    print(daily_sales_sums)
+
+    product_sales_sums = (
+        OrderDetail.objects.filter(product__seller=request.user)
+        .values("product__name")
+        .order_by("product__name")
+        .annotate(sum=Sum("amount"))
+    )
 
     return render(
         request,
@@ -200,5 +206,6 @@ def sales(request):
             "monthly_sales": monthly_sales,
             "weekly_sales": weekly_sales,
             "daily_sales_sums": daily_sales_sums,
+            "product_sales_sums": product_sales_sums,
         },
     )
